@@ -1,0 +1,18 @@
+language: bash
+services: docker
+
+env:
+  global:
+    - REPO_NAME=norby/nginx-alpine
+  matrix:
+    - BASE_IMAGE=alpine VERSION=1.14 EXTRA_TAGS="1.14"
+    - BASE_IMAGE=alpine VERSION=1.15 EXTRA_TAGS="latest; 1.15"
+
+install:
+  - git clone https://github.com/docker-library/official-images.git ~/official-images
+
+script:
+  - "./hooks/build.sh"
+
+after_script:
+  - docker images
