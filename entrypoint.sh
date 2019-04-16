@@ -3,7 +3,7 @@
 set -e
 
 logger() {
-  printf '%s (%s) %s [%s]: %s\n' "$(date --iso-8601=seconds)" "$(whoami)" "${BASH_SOURCE}" "${1}" "${2}"
+  printf '%s (%s) %s [%s]: %s\n' "$(date -Iseconds)" "$(whoami)" "${BASH_SOURCE}" "${1}" "${2}"
 }
 
 # Restore original default config if no config has been provided
@@ -28,10 +28,6 @@ if [ -n "$DEBUG" ]; then
     env
     echo "..."
 fi
-
-echo "Environment variables:"
-env
-echo "..."
 
 # Replace all variables
 for _curVar in `env | awk -F = '{print $1}'`;do
